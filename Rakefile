@@ -13,17 +13,26 @@ def cmd(cmd_str)
 				$stdout << data if stream == :stdout
 				$stderr << data if stream == :stderr
 			end
-		rescue Interrupt
-			session.exec! "killall -SIGINT node"
-			session.exec! "killall -SIGINT nodejs"
+		rescue
+			puts 'stopping...'
+			session.exec! "killall node"
+			session.exec! "killall nodejs"
 		end
 	end
 end
 
 task :install do
-	cmd "cd hearthDB && npm install --no-bin-link"
+	cmd "cd hearthDB && rm -rf node_modules && npm install --no-bin-link"
 end
 
 task :start do
-	cmd "node hearthDB/server.js"
+	cmd "cd hearthDB && npm start"
+end
+
+task :stop do
+	cmd "killall node"
+end
+
+task :run, [:cmd] do |t, args|
+	cmd args.cmd
 end
