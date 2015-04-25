@@ -1,0 +1,8 @@
+web:
+  build: .
+  working_dir: /src
+  command: node ./server.js
+  volumes:
+   - :/src
+  ports:
+   - "8080:8080"
