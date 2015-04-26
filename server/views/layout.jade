@@ -3,6 +3,8 @@ html
     head
         title= title
         base(href=baseHref)
+        each file in css
+            link(type="stylesheet" src=file)
     body
         div(ng-app="hdb" ng-cloak)
             block content
