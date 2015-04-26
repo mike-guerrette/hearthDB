@@ -1,0 +1,11 @@
+doctype html
+html
+    head
+        title= title
+        base(href=baseHref)
+    body
+        div(ng-app="hdb" ng-cloak)
+            block content
+
+    each file in js
+        script(src=file)

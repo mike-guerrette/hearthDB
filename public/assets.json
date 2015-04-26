@@ -1,0 +1,10 @@
+{
+  "js": [
+    "lib/angular/angular.js",
+    "lib/angular-ui-router/release/angular-ui-router.js",
+    "lib/jquery/dist/jquery.js",
+    "application.js",
+    "routes.js"
+  ],
+  "css": []
+}

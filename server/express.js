@@ -2,7 +2,8 @@
 
 module.exports = function() {
 	var express = require('express'),
-		path = require('path');
+		path = require('path'),
+		assets = require('../public/assets.json');
 
 	// App
 	var app = express();
@@ -11,11 +12,16 @@ module.exports = function() {
 
 	app.set('view engine', 'jade');
 
-	app.set(express.static('public'));
-
 	app.set('views', path.join(__dirname, 'views'));
 
-	app.get('/', function (req, res) {
+	app.use(express.static(path.resolve(__dirname, '../public')));
+
+	app.locals.title = 'HearthDB';
+	app.locals.baseHref = '/';
+	app.locals.js = assets.js;
+	app.locals.css = assets.css;
+
+	app.get('*', function (req, res) {
 	  res.render('index');
 	});
 
