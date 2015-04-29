@@ -5,4 +5,5 @@ Hearth DB
 
 Things you need (Windows):
 ---
- [NodeJS](https://nodejs.org/download/)
+ - [Git](http://git-scm.com/)
+ - [NodeJS](https://nodejs.org/download/)
