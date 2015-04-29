@@ -2,12 +2,11 @@ doctype html
 html
     head
         title= title
-        base(href=baseHref)
+        base(href=baseHref || '/')
         each file in css
             link(type="stylesheet" src=file)
-    body
-        div(ng-app="hdb" ng-cloak)
-            block content
+    body(ng-app="hdb")
+        block content
 
     each file in js
         script(src=file)

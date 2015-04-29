@@ -1,5 +1,8 @@
 node_modules
-public/lib
+client/lib
+client/ionic/www
+client/ionic/platforms
+client/ionic/plugins
 Gemfile.lock
 .npm
 .vagrant

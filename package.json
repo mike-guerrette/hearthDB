@@ -13,5 +13,22 @@
     "bower": "^1.4.1",
     "express": "^4.12.3",
     "jade": "^1.9.2"
+  },
+  "cordovaPlugins": [
+    "org.apache.cordova.device",
+    "org.apache.cordova.console",
+    "com.ionic.keyboard"
+  ],
+  "cordovaPlatforms": [
+    "android"
+  ],
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-contrib-clean": "^0.6.0",
+    "grunt-contrib-copy": "^0.8.0",
+    "grunt-contrib-jade": "^0.14.1",
+    "grunt-nodemon": "^0.4.0",
+    "grunt-shell": "^1.1.2",
+    "load-grunt-tasks": "^3.1.0"
   }
 }

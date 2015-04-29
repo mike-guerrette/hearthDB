@@ -3,7 +3,7 @@
 module.exports = function() {
 	var express = require('express'),
 		path = require('path'),
-		assets = require('../public/assets.json');
+		assets = require('../client/assets.json');
 
 	// App
 	var app = express();
@@ -14,7 +14,7 @@ module.exports = function() {
 
 	app.set('views', path.join(__dirname, 'views'));
 
-	app.use(express.static(path.resolve(__dirname, '../public')));
+	app.use(express.static(path.resolve(__dirname, '../client')));
 
 	app.locals.title = 'HearthDB';
 	app.locals.baseHref = '/';
@@ -31,4 +31,3 @@ module.exports = function() {
 
 	return app;
 };
-

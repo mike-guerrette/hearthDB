@@ -67,6 +67,7 @@ Vagrant.configure(2) do |config|
   # documentation for more information about their specific syntax and use.
   config.vm.provision "shell", inline: <<-SHELL
     sudo  rpm -Uvh http://download.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm
-    sudo yum install -y npm
+    sudo yum install -y npm postgresql postgresql-contrib
+    chkconfig postgresql on
   SHELL
 end
