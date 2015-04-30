@@ -5,26 +5,33 @@ module.exports = function(models) {
     var controller = {};
 
     controller.getList = function(req, res) {
-        models.Card.find({}, function(err, cards) {
-            if (err) {
-                console.error(err, err.stack);
-                res.status(500).json({
-                    code: 500,
-                    message: 'Failed to get cards',
-                    error: err
-                })
-            } else if (!cards) {
-                res.status(400).json({
-                    code: 400,
-                    message: 'No cards found'
-                })
-            } else {
-                res.status(200).json({
-                    code: 200,
-                    message: "Successfully retrieved cards",
-                    data: cards
-                })
-            }
+        var response = {};
+        models.Card.count({}, function(err, count) {
+            response.count = count;
+            var limit = parseInt(req.query.limit);
+            var page = parseInt(req.query.page);
+            models.Card.find({}, {limit: limit, offset: ((page-1)*limit)}, function(err, cards) {
+                if (err) {
+                    console.error(err, err.stack);
+                    res.status(500).json({
+                        code: 500,
+                        message: 'Failed to get cards',
+                        error: err
+                    })
+                } else if (!cards) {
+                    res.status(400).json({
+                        code: 400,
+                        message: 'No cards found'
+                    })
+                } else {
+                    response.cards = cards;
+                    res.status(200).json({
+                        code: 200,
+                        message: "Successfully retrieved cards",
+                        data: response
+                    })
+                }
+            });
         });
     };
 

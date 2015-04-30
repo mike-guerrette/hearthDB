@@ -3,6 +3,16 @@
         <h1>Card List</h1>
     </div>
 </div>
+
+<div class="row">
+    <pagination
+            total-items="totalItems"
+            items-per-page="limit"
+            ng-model="currentPage"
+            ng-change="pageChanged()">
+    </pagination>
+</div>
+
 <div class="row">
     <div class="panel">
         <table class="table table-responsive">

@@ -3,8 +3,12 @@
 
     angular.module('hdb').service('CardService',
         function($http) {
-            this.getList = function(callback) {
-                $http.get('./api/cards')
+            this.getList = function(query, callback) {
+                $http({
+                    method: 'GET',
+                    url: './api/cards',
+                    params: query
+                })
                     .error(function(res) {
                         callback(res.error, res.message);
                     })
