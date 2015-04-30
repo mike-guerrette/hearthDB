@@ -30,9 +30,22 @@ module.exports.init = function(config) {
             return;
         }
 
-        models.Card = db.define("cards", {
-            name: String,
-            cost: Number
+        models.Card = db.define('cards',    {
+            id: {type: 'serial', key: true},
+            game_id: {type: "text"},
+            name: {type: "text"},
+            type: {type: "text"},
+            faction: {type: "text"},
+            rarity: {type: "text"},
+            cost: {type: "integer"},
+            attack: {type: "integer"},
+            health: {type: "integer"},
+            text: {type: "text"},
+            flavor: {type: "text"},
+            artist: {type: "text"},
+            collectible: {type: "boolean"},
+            howToGetGold: {type: "text"},
+            mechanics: {type: "object"}
         });
 
         db.sync(function(err) {

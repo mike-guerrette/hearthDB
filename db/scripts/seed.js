@@ -1,22 +1,34 @@
 'use strict';
 
 var config = require('../../config'),
-    models = require('../').init(config);
+    async = require('async'),
+    models = require('../').init(config),
+    sets = require('./all_sets.json');
 
-models.Card.create([
-    {
-        name: 'Test Card One',
-        cost: 4
-    },
-    {
-        name: 'Test Card Two',
-        cost: 4
-    }
-], function(err, cards) {
-    if (err) {
-        console.error('Failed to add cards.');
-        console.error(err, err.stack);
+async.each(sets["Basic"], function(card, callback) {
+    card.game_id = card.id;
+    delete card.id;
+    console.log('Adding: ' + JSON.stringify(card));
+    if (!card.collectible) {
+        callback()
     } else {
-        console.log('Added cards: ', cards);
+        models.Card.create(card, function(err) {
+            if (err) {
+                console.error('Failed to add: ', card.name);
+                console.error(err, err.stack);
+                process.exit(1);
+            } else {
+                console.log("Added: ", card.name);
+                callback();
+            }
+        });
     }
+}, function(err) {
+   if (err) {
+       console.error('Failed to process sets');
+       process.exit(1);
+   } else {
+       console.log('Done!');
+       process.exit(0);
+   }
 });

@@ -2,9 +2,13 @@
   "js": [
     "lib/angular/angular.js",
     "lib/angular-ui-router/release/angular-ui-router.js",
+    "lib/angular-sanitize/angular-sanitize.js",
     "lib/jquery/dist/jquery.js",
     "lib/bootstrap/dist/js/bootstrap.js",
     "application.js",
+    "controllers/home.js",
+    "controllers/cards.js",
+    "services/card.js",
     "routes.js"
   ],
   "css": [
