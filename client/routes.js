@@ -12,12 +12,10 @@
                     templateUrl: 'views/home.html',
                     controller: 'HomeController'
                 })
-                .state('test', {
-                    url: '/test/:num',
-                    templateUrl: 'views/home.html',
-                    controller: function($scope, $stateParams) {
-                        $scope.message = 'TEST: Number = ' + $stateParams.num;
-                    }
+                .state('cards', {
+                    url: '/cards',
+                    templateUrl: 'views/cards.html',
+                    controller: 'CardsController'
                 });
         }
     );

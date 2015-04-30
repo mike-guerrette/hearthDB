@@ -1,0 +1,26 @@
+<div class="row">
+    <div class="panel">
+        <h1>Card List</h1>
+    </div>
+</div>
+<div class="row">
+    <div class="panel">
+        <table class="table table-responsive">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Text</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="card in cards">
+                <td>{{card.name}}</td>
+                <td>{{card.type}}</td>
+                <td ng-bind-html="card.text"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+

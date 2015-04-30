@@ -1,6 +1,6 @@
 body {
   background-color: #377791;
+  padding-top: 100px;
 }
-#hello-panel {
-  margin-top: 20%;
-}
+
+.navbar {border-radius: 0 !important;}

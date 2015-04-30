@@ -3,10 +3,12 @@
 module.exports = function(config) {
 	var express = require('express'),
 		path = require('path'),
-		assets = require('../client/assets.json');
+		assets = require('../client/assets.json'),
+		routes = require('./routes');
 
 	// App
-	var app = express();
+	var app = express(),
+		models = require('../db').init(config);
 
 	app.set('port', (process.env.PORT || 8080));
 
@@ -21,9 +23,7 @@ module.exports = function(config) {
 	app.locals.js = assets.js;
 	app.locals.css = assets.css;
 
-	app.get('*', function (req, res) {
-	  res.render('index');
-	});
+	routes(config, app, models);
 
 	app.listen(app.get('port'), function() {
 		console.log('Running on http://localhost:' + app.get('port'));
