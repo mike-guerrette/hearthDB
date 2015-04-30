@@ -2,14 +2,13 @@
   "js": [
     "lib/angular/angular.js",
     "lib/angular-ui-router/release/angular-ui-router.js",
-    "lib/angular-animate/angular-animate.js",
-    "lib/angular-aria/angular-aria.js",
-    "lib/angular-material/angular-material.js",
     "lib/jquery/dist/jquery.js",
+    "lib/bootstrap/dist/js/bootstrap.js",
     "application.js",
     "routes.js"
   ],
   "css": [
-    "lib/angular-material/angular-material.css"
+    "lib/bootstrap/dist/css/bootstrap.css",
+    "application.css"
   ]
 }

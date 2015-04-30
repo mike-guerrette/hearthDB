@@ -1,3 +1,4 @@
 'use strict';
 
-var express = require('./server/express.js')();
+var config = require('./config'),
+    express = require('./server/express.js')(config);

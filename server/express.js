@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = function() {
+module.exports = function(config) {
 	var express = require('express'),
 		path = require('path'),
 		assets = require('../client/assets.json');
@@ -16,8 +16,8 @@ module.exports = function() {
 
 	app.use(express.static(path.resolve(__dirname, '../client')));
 
-	app.locals.title = 'HearthDB';
-	app.locals.baseHref = '/';
+	app.locals.title = config.TITLE;
+	app.locals.baseHref = config.BASE_HREF;
 	app.locals.js = assets.js;
 	app.locals.css = assets.css;
 

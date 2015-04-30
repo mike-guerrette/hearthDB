@@ -35,6 +35,21 @@ module.exports = function(grunt) {
 				dest: './client/ionic/www/'
 			}
 		},
+		less: {
+			dist: {
+				files: {
+					'./client/application.css': [
+						'./client/less/**/*.less'
+					]
+				}
+			}
+		},
+		watch: {
+			less: {
+				files: ['./client/less/**/*.less'],
+				tasks: ['less']
+			}
+		},
 		nodemon: {
 			script: './server.js'
 		}
