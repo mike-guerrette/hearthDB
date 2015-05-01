@@ -1,8 +1,22 @@
+@brand-primary: #377791;
+
 body {
-  background-color: #377791
+  background-color: @brand-primary;
+  padding-top: 100px;
 }
 
-#hello-panel {
-  margin-top: 20%;
+.sort-icon {
+  color: @brand-primary
 }
 
+.sort-bar {
+  &:hover {
+    background-color: lighten(@brand-primary, 25%);
+  }
+}
+
+.title {
+  padding: 10px;
+}
+
+.navbar {border-radius: 0 !important;}

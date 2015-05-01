@@ -1,6 +1,6 @@
 <div class="row">
     <div class="panel">
-        <h1>Card List</h1>
+        <h1 class="title">Card List</h1>
     </div>
 </div>
 
@@ -17,18 +17,19 @@
     <div class="panel">
         <table class="table table-responsive">
             <thead>
-            <tr>
-                <th>Name</th>
-                <th>Type</th>
-                <th>Text</th>
-            </tr>
+                <tr ng-click="sort($event)">
+                    <th class="sort-bar" ng-repeat="(key, value) in cards[0]">
+                        {{key.toUpperCase()}}
+                        <span ng-if="sort_type === key" ng-class="sort_icon()"></span>
+                    </th>
+                </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="card in cards">
-                <td>{{card.name}}</td>
-                <td>{{card.type}}</td>
-                <td ng-bind-html="card.text"></td>
-            </tr>
+                <tr ng-repeat="card in cards">
+                    <td>{{card.name}}</td>
+                    <td>{{card.type}}</td>
+                    <td ng-bind-html="card.text"></td>
+                </tr>
             </tbody>
         </table>
     </div>

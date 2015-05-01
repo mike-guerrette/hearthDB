@@ -1,5 +1,7 @@
 'use strict';
 
+var _ = require('lodash');
+
 module.exports = function(models) {
 
     var controller = {};
@@ -10,7 +12,11 @@ module.exports = function(models) {
             response.count = count;
             var limit = parseInt(req.query.limit);
             var page = parseInt(req.query.page);
-            models.Card.find({}, {limit: limit, offset: ((page-1)*limit)}, function(err, cards) {
+            models.Card.find({}, {
+                limit: limit,
+                offset: ((page-1)*limit),
+                order: req.query.order
+            }, function(err, cards) {
                 if (err) {
                     console.error(err, err.stack);
                     res.status(500).json({
@@ -24,7 +30,10 @@ module.exports = function(models) {
                         message: 'No cards found'
                     })
                 } else {
-                    response.cards = cards;
+                    //TODO: filter in query
+                    response.cards = _.map(cards, function(card) {
+                        return _.pick(card, req.query.fields);
+                    });
                     res.status(200).json({
                         code: 200,
                         message: "Successfully retrieved cards",
