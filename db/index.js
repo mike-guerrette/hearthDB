@@ -48,6 +48,8 @@ module.exports.init = function(config) {
             mechanics: {type: "object"}
         });
 
+        models.db = db;
+
         db.sync(function(err) {
             if (err)  {
                 console.error('Failed to sync db.', err);

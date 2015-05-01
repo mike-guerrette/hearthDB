@@ -4,8 +4,10 @@ angular.module('hdb')
     .controller('CardsController', ['$scope', 'CardService',
         function($scope, CardService) {
 
+            $scope.limitOpts = [10, 20, 30];
+
             $scope.currentPage = 1;
-            $scope.limit = 15;
+            $scope.limit = $scope.limitOpts[0];
 
             $scope.sort_type = 'name';
             $scope.sort_desc = true;
@@ -14,6 +16,7 @@ angular.module('hdb')
 
             $scope.loadCards = function() {
                 CardService.getList({
+                        query: $scope.query,
                         limit: $scope.limit,
                         page: $scope.currentPage,
                         order: $scope.order,
@@ -46,10 +49,20 @@ angular.module('hdb')
                 $scope.loadCards();
             };
 
+            $scope.setLimit = function(option) {
+                $scope.limit = option;
+                $scope.loadCards();
+            };
+
             $scope.sort_icon = function() {
                 var dir = $scope.sort_desc ? 'bottom' : 'top';
                   return 'glyphicon glyphicon-triangle-' + dir
                           + ' pull-right sort-icon';
+            };
+
+            $scope.search = function(query) {
+                $scope.query = query;
+                $scope.loadCards();
             };
 
             $scope.pageChanged = function() {

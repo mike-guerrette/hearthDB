@@ -7,16 +7,21 @@ module.exports = function(models) {
     var controller = {};
 
     controller.getList = function(req, res) {
+        var query;
+        if (req.query.query) {
+            query = "name ~* '" + req.query.query + "'";
+        }
         var response = {};
-        models.Card.count({}, function(err, count) {
+        models.Card.count({where: query}, function(err, count) {
             response.count = count;
             var limit = parseInt(req.query.limit);
             var page = parseInt(req.query.page);
-            models.Card.find({}, {
-                limit: limit,
-                offset: ((page-1)*limit),
-                order: req.query.order
-            }, function(err, cards) {
+            models.Card.find({})
+                .limit(limit)
+                .offset((page-1)*limit)
+                .order(req.query.order)
+                .where(query)
+                .run(function(err, cards) {
                 if (err) {
                     console.error(err, err.stack);
                     res.status(500).json({
