@@ -3,6 +3,7 @@
     "lib/angular/angular.js",
     "lib/angular-ui-router/release/angular-ui-router.js",
     "lib/angular-sanitize/angular-sanitize.js",
+    "lib/angular-bootstrap/ui-bootstrap-tpls.js",
     "lib/jquery/dist/jquery.js",
     "lib/bootstrap/dist/js/bootstrap.js",
     "application.js",

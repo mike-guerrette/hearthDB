@@ -23,7 +23,7 @@ module.exports.init = function(config) {
         }
     };
 
-    orm.connect(pgOptions, function(err, db) {
+    orm.connect(process.env.DATABASE_URL || pgOptions, function(err, db) {
         if (err) {
             console.error('Failed to connect to Postgres DB');
             console.error(err, err.stack);
@@ -47,6 +47,8 @@ module.exports.init = function(config) {
             howToGetGold: {type: "text"},
             mechanics: {type: "object"}
         });
+
+        models.db = db;
 
         db.sync(function(err) {
             if (err)  {

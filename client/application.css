@@ -2,5 +2,15 @@ body {
   background-color: #377791;
   padding-top: 100px;
 }
-
-.navbar {border-radius: 0 !important;}
+.sort-icon {
+  color: #377791;
+}
+.sort-bar:hover {
+  background-color: #7bb5cd;
+}
+.title {
+  padding: 10px;
+}
+.navbar {
+  border-radius: 0 !important;
+}
