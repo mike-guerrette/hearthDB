@@ -4,7 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "postinstall": "bower install; node_modules/.bin/grunt less",
+    "postinstall": "bower install; grunt less",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
   },
