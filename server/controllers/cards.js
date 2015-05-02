@@ -1,6 +1,7 @@
 'use strict';
 
-var _ = require('lodash');
+var _ = require('lodash'),
+    orm = require('orm');
 
 module.exports = function(models) {
 
@@ -12,40 +13,51 @@ module.exports = function(models) {
             query = "name ~* '" + req.query.query + "'";
         }
         var response = {};
-        models.Card.count({where: query}, function(err, count) {
-            response.count = count;
-            var limit = parseInt(req.query.limit);
-            var page = parseInt(req.query.page);
-            models.Card.find({})
-                .limit(limit)
-                .offset((page-1)*limit)
-                .order(req.query.order)
-                .where(query)
-                .run(function(err, cards) {
-                if (err) {
-                    console.error(err, err.stack);
-                    res.status(500).json({
-                        code: 500,
-                        message: 'Failed to get cards',
-                        error: err
-                    })
-                } else if (!cards) {
-                    res.status(400).json({
-                        code: 400,
-                        message: 'No cards found'
-                    })
-                } else {
-                    //TODO: filter in query
-                    response.cards = _.map(cards, function(card) {
-                        return _.pick(card, req.query.fields);
+
+        var limit = parseInt(req.query.limit);
+        var page = parseInt(req.query.page);
+
+        models.Card.find().where(query).count(function(err, count) {
+            if (err) {
+                console.error(err, err.stack);
+                res.status(500).json({
+                    code: 500,
+                    message: 'Failed to get count.',
+                    error: err
+                })
+            } else {
+                response.count = count;
+                models.Card.find()
+                    .limit(limit)
+                    .offset((page-1)*limit)
+                    .order(req.query.order)
+                    .where(query)
+                    .run(function(err, cards) {
+                        if (err) {
+                            console.error(err, err.stack);
+                            res.status(500).json({
+                                code: 500,
+                                message: 'Failed to get cards',
+                                error: err
+                            })
+                        } else if (!cards) {
+                            res.status(400).json({
+                                code: 400,
+                                message: 'No cards found'
+                            })
+                        } else {
+                            //TODO: filter in query
+                            response.cards = _.map(cards, function(card) {
+                                return _.pick(card, req.query.fields);
+                            });
+                            res.status(200).json({
+                                code: 200,
+                                message: "Successfully retrieved cards",
+                                data: response
+                            })
+                        }
                     });
-                    res.status(200).json({
-                        code: 200,
-                        message: "Successfully retrieved cards",
-                        data: response
-                    })
-                }
-            });
+            }
         });
     };
 

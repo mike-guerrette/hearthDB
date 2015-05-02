@@ -5,6 +5,20 @@ angular.module('hdb')
         function($scope, CardService) {
 
             $scope.limitOpts = [10, 20, 30];
+            $scope.maxPages = 15;
+
+            $scope.fields = {
+                name: true,
+                type: true,
+                faction: false,
+                rarity: false,
+                cost: false,
+                attack: false,
+                health: false,
+                text: false,
+                flavor: false,
+                artist: false
+            };
 
             $scope.currentPage = 1;
             $scope.limit = $scope.limitOpts[0];
@@ -12,7 +26,7 @@ angular.module('hdb')
             $scope.sort_type = 'name';
             $scope.sort_desc = true;
 
-            $scope.order = '-name';
+            $scope.order = 'name';
 
             $scope.loadCards = function() {
                 CardService.getList({
@@ -20,7 +34,9 @@ angular.module('hdb')
                         limit: $scope.limit,
                         page: $scope.currentPage,
                         order: $scope.order,
-                        fields: ['name', 'type']
+                        fields: Object.keys($scope.fields).filter(function(key) {
+                            return $scope.fields[key] === true
+                        })
                     },
                     function(err, data) {
                         if (err) {
@@ -58,6 +74,17 @@ angular.module('hdb')
                 var dir = $scope.sort_desc ? 'bottom' : 'top';
                   return 'glyphicon glyphicon-triangle-' + dir
                           + ' pull-right sort-icon';
+            };
+
+            $scope.isSelected = function(isSelected) {
+                if (isSelected) {
+                    return 'active';
+                }
+            };
+
+            $scope.toggleOption = function(option) {
+                $scope.fields[option] = !$scope.fields[option];
+                $scope.loadCards();
             };
 
             $scope.search = function(query) {

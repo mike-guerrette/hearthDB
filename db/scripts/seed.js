@@ -39,7 +39,7 @@ async.each(Object.keys(sets), function(set, cb) {
         console.error('Failed to process sets');
         process.exit(1);
     } else {
-        console.log('Done!!')
+        console.log('Done!!');
         process.exit(0);
     }
 });

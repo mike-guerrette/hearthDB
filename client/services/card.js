@@ -13,6 +13,7 @@
                         callback(res.error, res.message);
                     })
                     .success(function(res) {
+                        console.log('data', res);
                         callback(null, res.data)
                     });
             }
