@@ -1,5 +1,6 @@
 node_modules
 client/lib
+client/application.css
 client/ionic/www
 client/ionic/platforms
 client/ionic/plugins
